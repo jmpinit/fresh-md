@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>your markdown</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body onload="start();">
+		<div id="preview"></div>
+
+		<!-- resources -->
+		<script src="js/jquery-2.1.0.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/markdown.min.js"></script>
+
+		<!-- communication -->
+		<script type="text/javascript">
+			var socket;
+			var firstconnect = true;
+			
+			function connect() {
+			  if(firstconnect) {
+				socket = io.connect(null);
+				
+				socket.on('update', function (data) {
+					$("#preview")[0].innerHTML = markdown.toHTML(data);
+				});
+				
+				socket.on('connect', function(){});
+				socket.on('disconnect', function(){ });
+				socket.on('reconnect', function(){ });
+				socket.on('reconnecting', function( nextRetry ){ });
+				socket.on('reconnect_failed', function(){ });
+				  
+				firstconnect = false;
+			  }
+			  else {
+				socket.socket.reconnect();
+			  }
+			}
+				
+			function start() {
+				connect();
+			};
+		</script>
+	</body>
+</html>

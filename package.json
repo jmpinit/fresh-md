@@ -1,0 +1,19 @@
+{
+	"name": "fresh.md",
+	"version": "0.1.0",
+	"author": "Owen Trueblood <http://hackniac.com>",
+	"description": "Keeps markdown file rendered in browser.",
+	"scripts": {
+		"start": "node fresh.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jmptable/derby.git"
+	},
+	"dependencies": {
+		"express":		"3.x",
+		"markdown":		"*",
+		"socket.io":	"*"
+	},
+	"license": "MIT"
+}
